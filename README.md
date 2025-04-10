@@ -1,21 +1,22 @@
-# LINUX CLI CHEAT SHEET
-Index of Content:
+# Linux-Explained
+
+- Welcome to **Linux-Explained** – a beginner-friendly guide to understanding and using Linux.
+- This repository is designed to help new users, tech enthusiasts, and aspiring developers get comfortable with the Linux operating system. 
+- Whether you're switching from another OS, learning Linux for development, or just curious about how it works, this guide aims to simplify the core concepts and tools.
+- The goal is to offer a straightforward, beginner-friendly reference to help you build a strong foundation in Linux.
+
+## Index of Content:
+- [Introduction to Linux](#a-brief-introduction-to-linux)
+    - [What is GNU](#what-is-gnu)
 - [Linux File System](#linux-file-system)
+    - [Linux Filesystem Hierarchy Structure](#linux-filesystem-hierarchy-structure)
     - [About various directories](#about-various-directories)
     - [File System Navigation using CLI](#file-system-navigation-using-cli)
-        - [pwd](#pwd)
-        - [ls](#ls)
-        - [cd](#cd)
-        - [touch](#touch)
-        - [cat](#cat)
-        - [mv](#mv)
-        - [cp](#cp)
-        - [rm](#rm)
-        - [rmdir](#rmdir)
+    - [`pwd`](#pwd), [`ls`](#ls), [`cd`](#cd), [`touch`](#touch), [`cat`](#cat), [`mv`](#mv), [`cp`](#cp), [`rm`](#rm), [`rmdir`](#rmdir)
 - [Package Managers](#package-managers)
     - [Introduction to Package Managers](#introduction-to-package-managers)
     - [Package Managers and Software Packages](#from-where-do-package-managers-get-these-software-packages)
-    - [View List of Repositories](#how-can-i-check-the-repositories-your-system-accesses-for-installing-software)
+    - [View List of Repositories](#how-to-check-the-list-of-repositories-your-system-accesses-for-installing-software)
     - [`apt` package manager](#apt-package-manager)
     - [`dpkg` package manager](#dpkg-package-manager)
     - [`apt` vs `dpkg`](#apt-vs-dpkg)
@@ -24,18 +25,75 @@ Index of Content:
     - [Working with Permissions](#working-with-permissions)
     - [chmod](#chmod-command-is-used-for-modifying-the-permissions-of-a-filedirectory)
 - [Process Management](#process-management)
-    - [top](#top)
-    - [kill](#kill)
-    - [killall](#killall)
+    - [`top`](#top), [`kill`](#kill), [`killall`](#killall)
+
+## A Brief Introduction to Linux
+
+- Linux is an open-source operating system kernel created by [Linus Torvalds](https://github.com/torvalds) in 1991.
+- Together, [GNU](#what-is-gnu) and Linux (also called GNU/Linux) form a complete operating system, often just called Linux.
+- The GNU Project provided all the essential tools needed to make a complete, usable operating system.
+- Linux is a Unix-like system, meaning it's inspired by the design of Unix. Unix was a closed-source operating system developed in the 1970s at AT&T’s Bell Labs.
+
+- #### What is GNU
+    - GNU stands for “GNU’s Not Unix” – a recursive acronym.
+    - It’s a free software project started by Richard Stallman in 1983.
+    - It's  Goal: Create a completely free and open Unix-like operating system.
+    - GNU is a collection of free software tools (created by the Free Software Foundation) that work with the Linux kernel to form a full operating system.
+    - Since Unix was proprietary, GNU set out to recreate it with open-source alternatives:
+
+        | **Component**     | **GNU Replacement**                                       |
+        |-------------------|-----------------------------------------------------------|
+        | Shell             | GNU Bash - `bash` (Bourne Again Shell)                    |
+        | System libraries  | GNU C Library - `glibc`                                   |
+        | File utilities    | coreutils - [ls](#ls), [cp](#cp), [echo](#echo) etc.      |
+        | Compiler          | GNU Compiler Collection - `gcc`                           |
+        | Debugger          | GNU Debugger - `gdb`                                      |
+        | Build tools       | `make`, `autoconf`, etc.                                  |
+        | Bootloader        | `GRUB` (GRand Unified Bootloader)                         |
+- In 1991, Linus Torvalds released the Linux kernel. Combining GNU tools + Linux kernel = a working operating system → GNU/Linux.
 
 ## LINUX FILE SYSTEM
 
-The Linux file system is a hierarchical directory structure that organizes files and directories in a tree-like structure, with a single root directory at the top of the hierarchy, represented by  `/`. Below the root directory, there are a number of other directories, including `/bin`, `/dev`, `/etc`, `/home`, `/lib`, `/mnt`, `/proc`, `/sbin`, `/tmp`, and `/usr`.
+- A file system in an operating system (OS) is a way of organizing and storing data on storage devices like hard drives, SSDs, USB drives, etc. 
+- It defines how files are named, stored, retrieved, and managed.
+- The Linux file system is a **hierarchical directory structure** that organizes files and directories in a **tree-like** structure, with a single **root** directory at the top of the hierarchy, represented by  `/`. 
+- Below the root directory, there are a number of other directories, including `/bin`, `/dev`, `/etc`, `/home`, `/lib`, `/mnt`, `/proc`, `/sbin`, `/tmp`, and `/usr`.
+- In Linux, **Everything is a File**. For example, devices, sockets, and even processes are treated as files, enabling uniform interaction via standard I/O operations.
+- Each file has access [permissions](#file-permissions) (*read*, *write*, *execute*) for *owner*, *group*, and *others*, controlled via commands like [chmod](#chmod), [chown](#chown), and [chgrp](#chgro).
+- External filesystems (like USBs or other partitions) are integrated into the directory tree using the [mount](#mount) command at specific mount points.
 
+### Linux Filesystem Hierarchy Structure
+
+```bash
+/                       # Root directory (top-level of the filesystem)
+├── bin/                # Essential user binaries (e.g., ls, bash)
+├── boot/               # Boot loader files (e.g., kernel, initrd)
+├── dev/                # Device files (e.g., /dev/sda)
+├── etc/                # System-wide configuration files
+├── home/               # Home directories for users
+│   ├── karan51ngh/     # Personal directory for a user named karan51ngh
+│   └── torvalds/       # Personal directory for a user named  torvalds
+├── lib/                # Essential shared libraries
+├── media/              # Mount point for removable media (e.g., USB drives)
+├── mnt/                # Temporary mount point for filesystems
+├── opt/                # Optional application software packages
+├── proc/               # Virtual filesystem for process and kernel info
+├── root/               # Home directory for the root user
+├── run/                # Temporary runtime files
+├── sbin/               # System binaries (usually for root)
+├── srv/                # Data for services provided by the system
+├── sys/                # Virtual filesystem for system and device info
+├── tmp/                # Temporary files (often cleared on reboot)
+├── usr/                # Secondary hierarchy for read-only user data
+│   ├── bin/            # Non-essential user binaries
+│   ├── lib/            # Non-essential libraries
+│   └── share/          # Architecture-independent data
+└── var/                # Variable data (e.g., logs, spool files)
+```
 ### About various directories
 
  - `/` : This is the root directory and the starting point of the file system. All other directories are contained within it.
- - `/bin` : This directory contains executable programs that are essential for system operation, such as ls, cp, and mv.
+ - `/bin` : This directory contains executable programs (also known as Binaries) that are essential for system operation, such as [ls](#ls), [cp](#cp), [mv](#mv), [mount](#mount), [rm](#rm), etc.
  - `/boot` : This directory contains the files needed for booting the system, including the kernel and bootloader.
  - `/dev` : This directory contains device files, which are used to communicate with hardware devices such as printers and USB drives.
  - `/etc` : This directory contains system configuration files, such as the configuration files for the network, user accounts, and startup scripts.
@@ -46,7 +104,9 @@ The Linux file system is a hierarchical directory structure that organizes files
  - `/opt` : This directory is used for installing optional software packages.
  - `/proc` : This directory provides information about the running processes and system resources.
  - `/root` : This directory is the home directory for the root user.
- - `/sbin` : This directory contains essential system administration programs, such as init and shutdown.
+ - `/sbin` : This directory contains essential system administration programs, such as init and shutdown that generally can only be employed by the [superuser]().
+ - `/srv` : can contain data directories of services such as HTTP (/srv/www/) or FTP.
+ - `/sys` : is a virtual filesystem that can be accessed to set or obtain information about the kernel's view of the system.
  - `/tmp` : This directory is used for temporary files that are created by the system and applications.
  - `/usr` : This directory contains non-essential system files, such as user programs and documentation.
  - `/var` : This directory contains variable data files, such as log files and spool directories.
@@ -55,13 +115,14 @@ The Linux file system is a hierarchical directory structure that organizes files
 
 File system navigation in Linux can be done using the command line interface.
 Here are the commands needed in brief:
+
 - ##### `pwd` 
 	>This command in Linux stands for **"print working directory"**. It is used to display the current working directory, which is the directory that the user is currently in.
 
 - ##### `ls`
 	>This command in Linux is used to list the contents of a directory and it also provides information about the files and directories in the current directory / specified directory.
 
-    - *Syntax*: `ls [options] <directory_name>`. `<directory_name>` by default is the current working directory. 
+    - *Syntax*: `ls [options] <DIRECTORY_NAME>`. `<DIRECTORY_NAME>` by default is the current working directory. 
     - *options*:
         - `ls`: Shows files and directories in short format.
         - `ls -a`: Shows **hidden** (that start with a dot `.`)files and directories. 
@@ -77,7 +138,7 @@ Here are the commands needed in brief:
 
     - *Options*:
         - `cd` / `cd ~`: Changes the current working directory to your **home** directory.
-        - `cd <directory_name>`: Changes the current working directory to the specified directory.
+        - `cd <DIRECTORY_NAME>`: Changes the current working directory to the specified directory.
         - `cd -`: Changes the current working directory to the **previous** working directory.
         - `cd ..`: Changes the current working directory to the **parent** directory.
 - ##### `touch`
@@ -103,7 +164,7 @@ Here are the commands needed in brief:
 - ##### `mv`
 	>This command is used to move or rename files and directories.
 
-    - *Syntax*: `mv [Options] [source/directory/file/name] [destination/directory/file/name]`
+    - *Syntax*: `mv [Options] [source/directory/FILE_NAME] [destination/directory/FILE_NAME]`
 	- *Options*:
 	    - `mv file.txt /home/user/new_directory/`: move the file file.txt to the directory /home/user/new_directory/.
 		- `mv -i <file_name> <directory_name>`: Makes the process **interactive**, **prompts** before overwriting an existing file.
@@ -130,7 +191,7 @@ Here are the commands needed in brief:
         - `rm <file_1>`: This will delete file_1.
         - `rm -r <directory_name/>`: This will recursively delete the directory directory and its contents.
         - `rm -f <file_1>`: *Forces** the deletion of file without prompting, even if the file is write-protected.
-        - - `rm -i <file_1>`: Makes the process **interactive**, **prompts** before deleting the file
+        - `rm -i <file_1>`: Makes the process **interactive**, **prompts** before deleting the file
 - ##### `rmdir`
 	>This command is used to remove empty directories in Linux.
    	
@@ -229,7 +290,7 @@ Here Terminal Commands for checking the repositories on various major Linux dist
     - Query which package a file belongs to: `dpkg --search file_path`
     - Extract files from a package: `dpkg -x package_name.deb directory_path`
 
-### apt vs dpkg
+### Differences between `apt` and `dpkg` package managers
  
  - `dpkg` and `apt` are both package managers for Debian-based systems such as Ubuntu.
  - `dpkg` is a lower-level package manager that works with **individual .deb packages**. 
@@ -238,7 +299,7 @@ Here Terminal Commands for checking the repositories on various major Linux dist
  
 ## FILE PERMISSIONS
 
-File permissions are a way of controlling access to files and directories. 
+>File permissions are a way of controlling access to files and directories. 
 
 ### Types of Permissions and Users
 
