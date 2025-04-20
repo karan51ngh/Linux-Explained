@@ -27,14 +27,14 @@
 - [Process Management](#process-management)
     - [`top`](#top), [`kill`](#kill), [`killall`](#killall)
 
-## A Brief Introduction to Linux
+## A BRIEF INTRODUCTION TO LINUX
 
 - Linux is an open-source operating system kernel created by [Linus Torvalds](https://github.com/torvalds) in 1991.
 - Together, [GNU](#what-is-gnu) and Linux (also called GNU/Linux) form a complete operating system, often just called Linux.
 - The GNU Project provided all the essential tools needed to make a complete, usable operating system.
 - Linux is a Unix-like system, meaning it's inspired by the design of Unix. Unix was a closed-source operating system developed in the 1970s at AT&T’s Bell Labs.
 
-- #### What is GNU
+- ### What is GNU
     - GNU stands for “GNU’s Not Unix” – a recursive acronym.
     - It’s a free software project started by Richard Stallman in 1983.
     - It's  Goal: Create a completely free and open Unix-like operating system.
@@ -98,7 +98,7 @@
  - `/dev` : This directory contains device files, which are used to communicate with hardware devices such as printers and USB drives.
  - `/etc` : This directory contains system configuration files, such as the configuration files for the network, user accounts, and startup scripts.
  - `/home` : This directory contains user home directories, where users can store their personal files.
- - `/lib` : This directory contains shared library files that are used by the system and applications.
+ - `/lib` : This directory contains the essential shared libraries needed to boot the system and run basic commands in `/bin` and `/sbin`
  - `/media` : This directory is used for mounting removable media such as CDs, DVDs, and USB drives.
  - `/mnt` : This directory is used for temporarily mounting file systems, such as network file systems or external hard drives.
  - `/opt` : This directory is used for installing optional software packages.
@@ -122,7 +122,12 @@ Here are the commands needed in brief:
 - ##### `ls`
 	>This command in Linux is used to list the contents of a directory and it also provides information about the files and directories in the current directory / specified directory.
 
-    - *Syntax*: `ls [options] <DIRECTORY_NAME>`. `<DIRECTORY_NAME>` by default is the current working directory. 
+    - *Syntax*: 
+        
+        ```bash
+        ls [OPTIONS] <DIRECTORY_NAME>
+        ``` 
+        `<DIRECTORY_NAME>` by default is the current working directory. 
     - *options*:
         - `ls`: Shows files and directories in short format.
         - `ls -a`: Shows **hidden** (that start with a dot `.`)files and directories. 
@@ -144,7 +149,11 @@ Here are the commands needed in brief:
 - ##### `touch`
 	>This command in Linux is used to create an empty file or update the timestamp of an existing file.
 
-    - *Syntax*: `touch [OPTION]... <FILE_NAMES>...`
+    - *Syntax*:
+
+        ```bash
+        touch [OPTIONS]... <FILE_NAMES>...
+        ```
     - *Options*:
         - `touch <file_name>`: Creates an empty file with the specified name, or updates the timestamp of an existing file.
         - `touch -a <file_name>`: Updates only the **access time** of the specified file.
@@ -153,7 +162,11 @@ Here are the commands needed in brief:
 - ##### `cat`
 	>This command is primarily used to concatenate and display the contents of one or more files, but can also be used to modify them.
 
-    - *Syntax*: `cat [OPTION]... <FILE_NAMES>...`
+    - *Syntax*:
+
+        ```bash
+        cat [OPTIONS]... <FILE_NAMES>...
+        ```
     - *Options*:
         - `cat <file_name>`: Displays the contents of the specified file on the screen.
         - `cat <file_1> <file_2>`: **Concatenates** the contents of two or more files and displays them on the screen.
@@ -164,7 +177,11 @@ Here are the commands needed in brief:
 - ##### `mv`
 	>This command is used to move or rename files and directories.
 
-    - *Syntax*: `mv [Options] [source/directory/FILE_NAME] [destination/directory/FILE_NAME]`
+    - *Syntax*:
+    
+        ```bash
+        mv [OPTIONS] [source/directory/FILE_NAME] [destination/directory/FILE_NAME]
+        ```
 	- *Options*:
 	    - `mv file.txt /home/user/new_directory/`: move the file file.txt to the directory /home/user/new_directory/.
 		- `mv -i <file_name> <directory_name>`: Makes the process **interactive**, **prompts** before overwriting an existing file.
@@ -174,7 +191,11 @@ Here are the commands needed in brief:
 - ##### `cp`
 	>This is used to copy files and directories from one location to another.
 
-    - *Syntax*: `cp [Options] [source/directory/file/name] [destination/directory/file/name]`
+    - *Syntax*:
+
+        ```bash
+        cp [OPTIONS] <source/directory/file/name> <destination/directory/file/name>
+        ```
 	- *Options*:
 	    - `cp <file_1> /home/user/new_directory/`: copy the file *file_1* to the directory */home/user/new_directory/*.
 		- `cp -i <file_name> <directory_name>`: Makes the process **interactive**, **prompts** before overwriting an existing file
@@ -186,7 +207,11 @@ Here are the commands needed in brief:
 - ##### `rm`
 	>This is used to remove or delete files and directories.
 
-    - *Syntax*: `cat [OPTION]... <FILE_NAMES> <DIR_NAMES>...`
+    - *Syntax*:
+
+        ```bash
+        cat [OPTIONS]... <FILE_NAMES> <DIR_NAMES>...
+        ```
     - *Options*: 
         - `rm <file_1>`: This will delete file_1.
         - `rm -r <directory_name/>`: This will recursively delete the directory directory and its contents.
@@ -195,7 +220,11 @@ Here are the commands needed in brief:
 - ##### `rmdir`
 	>This command is used to remove empty directories in Linux.
    	
-    - *Syntax*: `rmdir <directory_name>`
+    - *Syntax*:
+
+        ```bash
+        rmdir <directory_name>
+        ```
 
 ## PACKAGE MANAGERS
 
@@ -234,7 +263,11 @@ Here Terminal Commands for checking the repositories on various major Linux dist
 ### apt package manager
 
 - The `apt` command is a package management tool for **Debian-based** Linux distributions.
-- *Syntax*: `apt [options] <package_name>`
+- *Syntax*: 
+    
+    ```bash
+    apt [OPTIONS] <PACKAGE_NAME>
+    ```
 - *Options*:
     - `apt update`: updates the package lists from the repositories.
     - `apt upgrade`: upgrades the installed packages to their latest versions.
@@ -263,7 +296,11 @@ Here Terminal Commands for checking the repositories on various major Linux dist
 ### dpkg package manager:
  
 - `dpkg` is a package manager for **Debian-based** systems such as **Ubuntu**. It is used to *install*, *remove*, and *manage software packages* in the `.deb` format.
-- *Syntax*: `dpkg [options] <package_name.deb>`
+- *Syntax*:
+
+    ```bash
+    dpkg [OPTIONS] <PACKAGE_NAME>.deb
+    ```
 - *Options*:
     - `-i`/`--install`: Install a package from a .deb file.
     - `-r`/`--remove`: Remove a package from the system, leaving its configuration files intact.
@@ -274,7 +311,7 @@ Here Terminal Commands for checking the repositories on various major Linux dist
     - `--force-remove-reinstreq`: Force the removal of a package even if it is required by other installed packages.
     - `list`: List the installed packages on the system.
     - `search`: Search for a package by name.
-    - For a complete list of options, `--help` flag with the `dpkg` command.
+    - For a complete list of OPTIONS, `--help` flag with the `dpkg` command.
 - dpkg installs packages on Ubuntu in order to follow the Filesystem Hierarchy Standard (FHS), which defines a standard directory structure for Unix-like operating systems.
 - When you use dpkg to install a package, the package and its files are installed in the following locations:
     - **Executable files**: `/usr/bin`
@@ -296,7 +333,48 @@ Here Terminal Commands for checking the repositories on various major Linux dist
  - `dpkg` is a lower-level package manager that works with **individual .deb packages**. 
  - **`dpkg` does not have the ability to automatically resolve dependencies or install packages from a remote repository.**
  - `apt` is a higher-level package manager that is built on top of `dpkg`. It has the ability to automatically resolve dependencies and install packages from a remote repository, making it easier to use than dpkg.
- 
+
+## USER MANAGEMENT
+> user management and permissions are fundamental for maintaining security and controlling access to system resources.
+
+- Linux is a multi-user operating system, allowing multiple users to work on the same system simultaneously.
+- Each user has their own account with a unique username and password.
+- Users can be organized into groups, simplifying permission management by setting permissions for entire groups rather than individual users.
+
+### Working with Users
+
+- ##### `useradd`
+    >This creates a new user with various attributes depending on the OPTIONS chosen.
+    - *Syntax*: 
+        
+        ```bash
+        useradd [OPTIONS] <USER_NAME>
+        ```
+    - *Options*:
+        - `sudo useradd USER_NAME` : Creates a user, named USER_NAME but doesn't set a password or create a home directory just yet.
+        - `sudo useradd -m USER_NAME.`: Automatically creates the user USER_NAME's home directory.
+        - `sudo useradd --help`: This will help you understand all the options that can be used with the `useradd` command.
+        - `sudo useradd -p TEST_PASSWD USER_NAME`: sets an unencrypted password for the user USER_NAME
+        - `sudo passwd USER_NAME`: This can be used to assign an encrypted password to the user USER_NAME. It will ask for confirmation.
+
+            > *NOTE*:  In Linux, an "unencrypted password" refers to a password stored in as a plain text (Not Safe and Vulnerable) in the `/etc/passwd` file. Encrypted passwords are stored as a secure hash in the `/etc/shadow` file. 
+        - `sudo useradd -G sudo,developers USER_NAME`: Creating a user and assigning it to specific groups (developers and sudo in this example.)
+        - `sudo useradd --help`: This will display all the options and documentation for the `useradd` command.
+
+- ##### `userdel`
+    >This removes a user account.
+    - *Syntax*: 
+        
+        ```bash
+        sudo userdel [OPTIONS] <USER_NAME>
+        ```
+    - *Options*:
+        - `sudo userdel <USER_NAME>`: Removes the user account but keeps home directory.
+        - `sudo userdel -r <USER_NAME>` (`--remove` can also be used): Remove a user along with the home directory and mail spool
+        - `sudo userdel -f <USER_NAME>`: Can be used to force-delete a logged-in user, (Can be used, in case one gets “User Still Exists” error).
+        - `userdel` does not remove user-owned files outside their home directory.
+        - `find / -user <USER_NAME>` can be used to locate and clean up files after deletion.
+
 ## FILE PERMISSIONS
 
 >File permissions are a way of controlling access to files and directories. 
@@ -348,7 +426,11 @@ Here Terminal Commands for checking the repositories on various major Linux dist
     >This is used for modifying the permissions of a file/directory.
     
     - *Symbollic mode*:
-        - *Syntax*: `chmod <user_type><take/remove permission><list_of_permissions> <file_names>`
+        - *Syntax*: 
+        
+            ```bash
+            chmod <user_type><take/remove permission><list_of_permissions> <file_names>
+            ```
         - *Examples*:
             - to add execute permissions for the owner of a file you would run: `chmod u+x file_name`
             - to add read and write permissions for the group that owns the file, you would run: `chmod g+rw file_name`
@@ -356,7 +438,11 @@ Here Terminal Commands for checking the repositories on various major Linux dist
     - *Numeric Mode*:
         > We can use the numbers(from the above table) assigned to different permissions.
         
-        - *Syntax*: `chmod <number_owner><number_group><number_others> <file_names>`
+        - *Syntax*: 
+        
+            ```bash
+            chmod <number_owner><number_group><number_others> <file_names>
+            ```
         - *Example*:
             - to set permissions on a file to rwxrw-r-–, you would run: `chmod 764 file_name`
 
@@ -367,7 +453,11 @@ A process is an instance of a running program, and each process has its own uniq
 - ##### `top`
     >This is used to monitor the performance of the system and display real-time information about the processes running on it.
     
-    - *Syntax*: `top [options]`
+    - *Syntax*: 
+        
+        ```bash
+        top [OPTIONS]
+        ```
     - *Options*:
         - `top -d <n>`: sets the delay as *n seconds* between updates of the process list.
         - `top -n <n>`: sets the number of iterations for which the `top` command will run before exiting as *n*.
@@ -379,7 +469,11 @@ A process is an instance of a running program, and each process has its own uniq
 - ##### `kill`
     >The is used to send     signals to running processes. The signals can be used to control the behavior of the processes or terminate them.
     
-    - *Syntax*: `kill [signal] [pid]`
+    - *Syntax*: 
+        
+        ```bash
+        kill [SIGNAL] [PROCESS_ID]
+        ```
     - *Signals*:
         - **TERM** (signal 15): Request that the process terminate gracefully.
         - **KILL** (signal 9): Forcefully terminate the process without allowing it to perform any cleanup.
@@ -396,7 +490,11 @@ A process is an instance of a running program, and each process has its own uniq
 - ##### `killall`
     > This command is used to send signals to all processes that match a given name, making it a more convenient way than `kill` to terminate multiple processes at once. By default, killall sends the TERM signal.
     
-    - *Syntax*: `killall [options] <name>`
+    - *Syntax*: 
+        
+        ```bash
+        killall [OPTIONS] <name>
+        ```
     - *Options*:
         - `killall -u <user> <name>`: Send the default TERM signal to all <name> processes owned by the user <user>.
         - `killall -g <group> <name>`: Send the default TERM signal to all <name> processes belonging to the users group <group>.
